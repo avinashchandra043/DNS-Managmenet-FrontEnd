@@ -1,0 +1,8 @@
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
+
+[build.environment]
+  NODE_VERSION = "20.10.0"
+  NPM_VERSION = "10.2.3"

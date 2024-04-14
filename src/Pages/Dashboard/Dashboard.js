@@ -23,6 +23,7 @@ const useStyle = createUseStyles({
   },
   tabButtonContainer: {
     display: "flex",
+    height: "40px",
     "& div": {
       borderBottom: "2px solid transparent",
       padding: "10px 30px 0px",
@@ -31,7 +32,9 @@ const useStyle = createUseStyles({
   },
   buttonContainer: {
     display: "flex",
-    gap: "50px",
+    gap: "10px 50px",
+    flexWrap: "wrap",
+    justifyContent: "flex-end",
     "& div": {
       padding: "10px 20px",
       background: `${theme.buttonColor}`,
@@ -86,7 +89,11 @@ const Dashboard = ({ jwt, user }) => {
           navigate("/auth/aws");
         } else {
           const res = await listDomain();
-          if (!res) {
+
+          if (!res.success) {
+            if (res?.msg?.response?.data?.error === "jwt malformed") {
+              window.location.reload();
+            }
             toast("Failed to Load Record", { type: "error" });
           }
         }

@@ -20,11 +20,11 @@ export const listDomain = async () => {
     const res = await baseApi.get(`${API.dnsApi}/api/dns/list`);
     if (res) {
       dispatch({ type: DOMAIN_LIST, payload: res.data.data });
-      return true;
+      return { success: true };
     }
-    return false;
+    return { success: false };
   } catch (err) {
-    return false;
+    return { success: false, msg: err };
   }
 };
 

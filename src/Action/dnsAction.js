@@ -6,7 +6,6 @@ const { dispatch } = store;
 export const createDomain = async (domainName) => {
   try {
     const res = await baseApi.post(`${API.dnsApi}/api/dns/create`, domainName);
-    console.log(">>>>>res", res);
     if (res) {
       return res;
     }

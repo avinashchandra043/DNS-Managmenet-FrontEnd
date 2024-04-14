@@ -9,7 +9,8 @@ const Api = {
     dnsApi: "",
   },
   DEV: {
-    dnsApi: "http://localhost:5454",
+    dnsApi: "https://dns-management-backend-8cwe.onrender.com",
+    // dnsApi: "http://localhost:5454",
   },
 };
 

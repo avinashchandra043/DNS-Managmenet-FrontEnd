@@ -51,6 +51,7 @@ const EditRecordModal = ({ isOpen, onClose, onCreate, record }) => {
 
   const [recordData, setRecordData] = useState({
     TTL: record.TTL,
+    ResourceRecords: record.ResourceRecords,
   });
 
   const handleEdit = async () => {
@@ -59,8 +60,9 @@ const EditRecordModal = ({ isOpen, onClose, onCreate, record }) => {
       name: record.Name,
       type: record.Type,
       ttl: recordData.TTL,
-      value: record.ResourceRecords[0].Value,
+      ResourceRecords: record.ResourceRecords,
     };
+
     const res = await updateRecord(data);
     if (res) {
       window.location.reload();
@@ -73,6 +75,12 @@ const EditRecordModal = ({ isOpen, onClose, onCreate, record }) => {
     return null;
   }
 
+  const handleResourceRecordChange = (index, value) => {
+    const newResourceRecords = [...recordData.ResourceRecords];
+    newResourceRecords[index].Value = value;
+    setRecordData({ ...recordData, ResourceRecords: newResourceRecords });
+  };
+
   return (
     <div className={classes.container} onClick={onClose}>
       <div
@@ -84,10 +92,23 @@ const EditRecordModal = ({ isOpen, onClose, onCreate, record }) => {
           lable="TTL"
           type="text"
           placeholder="TTL"
+          defaultValue={recordData.TTL}
           changeHandler={(val) => {
             setRecordData({ ...recordData, TTL: val });
           }}
         />
+        {recordData.ResourceRecords.map((item, index) => (
+          <Input
+            lable="TTL"
+            type="text"
+            placeholder={`value ${index + 1}`}
+            defaultValue={item.Value}
+            changeHandler={(val) => {
+              handleResourceRecordChange(index, val);
+            }}
+          />
+        ))}
+        {}
         <div className={classes.buttonGroup}>
           <div className={classes.button} onClick={handleEdit}>
             Edit

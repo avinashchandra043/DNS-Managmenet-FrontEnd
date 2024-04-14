@@ -13,6 +13,8 @@ const ThemeColor = {
     buttonHoverColor: "rgba(51, 71, 91,0.8)",
     linkColor: "#3498db",
     inputFieldBackground: "#f0f0f0",
+    graphBorderColor: "#f80759",
+    graphBackgroundColor: "#bc4e9c",
   },
 };
 

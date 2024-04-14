@@ -8,7 +8,7 @@ import CreateHostedZone from "./Componets/CreateHostedZone";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getToken, getUser } from "../../Action/authAction";
-import { listDomain } from "../../Action/dnsAction";
+import { bulkDomainCreate, listDomain } from "../../Action/dnsAction";
 
 const useStyle = createUseStyles({
   container: {
@@ -87,6 +87,13 @@ const Dashboard = ({ jwt, user }) => {
     }
   }, [user, navigate]);
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      bulkDomainCreate(file);
+    }
+  };
+
   return (
     <div className={classes.headContainer}>
       <Header />
@@ -116,7 +123,18 @@ const Dashboard = ({ jwt, user }) => {
           </div>
           <div className={classes.buttonContainer}>
             <div onClick={openModal}>Create Domain</div>
-            <div>Bulk Import</div>
+            <div>
+              <label htmlFor="bulk-import-file" style={{ cursor: "pointer" }}>
+                Bulk Import
+              </label>
+              <input
+                id="bulk-import-file"
+                type="file"
+                style={{ display: "none" }}
+                accept=".csv,application/json"
+                onChange={handleFileChange}
+              />
+            </div>
           </div>
         </div>
         <div>{activeTab === "domain" ? <DomainTab /> : <MetricsTab />}</div>

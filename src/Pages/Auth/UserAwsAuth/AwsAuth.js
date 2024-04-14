@@ -51,9 +51,9 @@ const useStyle = createUseStyles({
 });
 const AwsAuth = ({ user, jwt }) => {
   const [data, setData] = useState({
-    accessKeyId: user?.aws.accessKeyId || "",
-    secretAccessKey: user?.aws.secretAccessKey || "",
-    region: user?.aws.region || "",
+    accessKeyId: user?.aws?.accessKeyId || "",
+    secretAccessKey: user?.aws?.secretAccessKey || "",
+    region: user?.aws?.region || "",
   });
   const navigate = useNavigate();
   const classes = useStyle();

@@ -3,6 +3,7 @@ import { createUseStyles } from "react-jss";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { listRecord } from "../../../Action/dnsAction";
+import Loader from "../../../Components/Loader/Loader";
 const useStyle = createUseStyles({
   container: {
     overflow: "hidden",
@@ -143,19 +144,25 @@ const DomainTab = ({ domainList }) => {
           </div>
         </div>
         <div className={classes.rowScroll}>
-          {domains?.map((domain, index) => (
-            <div
-              key={domain.Id}
-              className={classes.row}
-              onClick={() => handleDomainClick(domain.Id)}
-            >
-              <div className={classes.col1}>{index + 1}</div>
-              <div className={classes.col2}>{domain.Name}</div>
-              <div className={classes.col3}>
-                {domain.ResourceRecordSetCount}
-              </div>
-            </div>
-          ))}
+          {!domains ? (
+            <Loader />
+          ) : (
+            <>
+              {domains?.map((domain, index) => (
+                <div
+                  key={domain.Id}
+                  className={classes.row}
+                  onClick={() => handleDomainClick(domain.Id)}
+                >
+                  <div className={classes.col1}>{index + 1}</div>
+                  <div className={classes.col2}>{domain.Name}</div>
+                  <div className={classes.col3}>
+                    {domain.ResourceRecordSetCount}
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

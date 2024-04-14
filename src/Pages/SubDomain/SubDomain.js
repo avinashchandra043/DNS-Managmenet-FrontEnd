@@ -8,7 +8,12 @@ import EditRecordModal from "./Components/EditRecord";
 import { getToken, getUser } from "../../Action/authAction";
 import { useNavigate, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { deleteRecord, listRecord } from "../../Action/dnsAction";
+import {
+  bulkRecordCreate,
+  deleteRecord,
+  listRecord,
+} from "../../Action/dnsAction";
+import Loader from "../../Components/Loader/Loader";
 
 const useStyles = createUseStyles({
   container: {
@@ -126,6 +131,7 @@ const SubDomain = ({ jwt, recordList }) => {
     editRecord: false,
   });
   const [currentRecord, setCurrentRecord] = useState(null);
+  const [loading, setLoading] = useState(true); // New loading state
   const { hostedZoneId } = useParams();
   const navigate = useNavigate();
 
@@ -177,9 +183,38 @@ const SubDomain = ({ jwt, recordList }) => {
     if (!token) {
       navigate("/auth");
     }
+    setLoading(true);
+    const fetchData = async () => {
+      try {
+        const id = { HostedZoneId: `/hostedzone/${hostedZoneId}` };
+        await listRecord(id);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+    return () => {
+      setActiveDropdownIndex(null);
+      setIsModalOpen({
+        createRecord: false,
+        editRecord: false,
+      });
+      setCurrentRecord(null);
+    };
   }, [hostedZoneId, jwt, navigate]);
+
   const handleBack = () => {
     navigate("/dashboard");
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      bulkRecordCreate(file);
+    }
   };
 
   return (
@@ -192,7 +227,18 @@ const SubDomain = ({ jwt, recordList }) => {
           </div>
           <div className={classes.buttonContainer}>
             <div onClick={openModal}>Create Record</div>
-            <div>Bulk Import</div>
+            <div>
+              <label htmlFor="bulk-import-file" style={{ cursor: "pointer" }}>
+                Bulk Import
+              </label>
+              <input
+                id="bulk-import-file"
+                type="file"
+                style={{ display: "none" }}
+                accept=".csv,application/json"
+                onChange={handleFileChange}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -204,44 +250,57 @@ const SubDomain = ({ jwt, recordList }) => {
           <div className={classes.col4}>TTL</div>
           <div className={classes.col5}></div>
         </div>
-        <div className={classes.rowScroll}>
-          {recordList?.map((item, index) => (
-            <div className={classes.row} key={index}>
-              <div className={classes.col1}>{index + 1}</div>
-              <div className={classes.col2}>{item.Name}</div>
-              <div className={classes.col3}>{item.Type}</div>
-              <div className={classes.col4}>{item.TTL}</div>
-              <div className={classes.col5}>
-                <div
-                  onClick={() => handleThreeDotsClick(index)}
-                  className={classes.threeDots}
-                >
-                  <ThreeDots />
-                </div>
-                <div
-                  className={`${classes.dropdownMenu} ${
-                    activeDropdownIndex === index ? "active" : ""
-                  }`}
-                  onClick={(e) => e.stopPropagation()}
-                >
+        {loading ? (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "grid",
+              placeContent: "center",
+            }}
+          >
+            <Loader />
+          </div>
+        ) : (
+          <div className={classes.rowScroll}>
+            {recordList?.map((item, index) => (
+              <div className={classes.row} key={index}>
+                <div className={classes.col1}>{index + 1}</div>
+                <div className={classes.col2}>{item.Name}</div>
+                <div className={classes.col3}>{item.Type}</div>
+                <div className={classes.col4}>{item.TTL}</div>
+                <div className={classes.col5}>
                   <div
-                    className={classes.dropdownOption}
-                    onClick={() => handleDropdownOptionClick("edit", item)} // Pass the item to the handler
+                    onClick={() => handleThreeDotsClick(index)}
+                    className={classes.threeDots}
                   >
-                    Edit
+                    <ThreeDots />
                   </div>
                   <div
-                    className={classes.dropdownOption}
-                    onClick={() => handleDropdownOptionClick("delete", item)}
-                    style={{ background: `${theme.danger}` }}
+                    className={`${classes.dropdownMenu} ${
+                      activeDropdownIndex === index ? "active" : ""
+                    }`}
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    Delete
+                    <div
+                      className={classes.dropdownOption}
+                      onClick={() => handleDropdownOptionClick("edit", item)}
+                    >
+                      Edit
+                    </div>
+                    <div
+                      className={classes.dropdownOption}
+                      onClick={() => handleDropdownOptionClick("delete", item)}
+                      style={{ background: `${theme.danger}` }}
+                    >
+                      Delete
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
       <CreateRecordModal
         isOpen={isModalOpen.createRecord}

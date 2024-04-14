@@ -122,7 +122,7 @@ const Dropdown = ({ options, onSelect, placeholder, defaultValue = null }) => {
     <div className={classes.dropdown} ref={dropdownRef}>
       <button className={classes.dropdownToggle} onClick={toggleDropdown}>
         <div className={classes.dropdownContainer}>
-          {selectedOption ? (
+          {selectedOption?.name ? (
             <div>{selectedOption.name}</div>
           ) : (
             <div style={{ color: "#9b9b9b" }}>

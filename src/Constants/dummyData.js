@@ -1,208 +1,92 @@
 export const dummyDomain = {
-  HostedZones: [
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN01",
-      Name: "example01.com.",
-      CallerReference: "dummy-caller-reference-01",
-      Config: {
-        Comment: "Domain 1",
-        PrivateZone: false,
+  data: {
+    HostedZones: [
+      {
+        Id: "/hostedzone/Z013466739SK5J0YBP8GA",
+        Name: "example61.com.",
+        CallerReference: "create-hosted-zone-1713015024298",
+        Config: {
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 2,
       },
-      ResourceRecordSetCount: 10,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN02",
-      Name: "example02.com.",
-      CallerReference: "dummy-caller-reference-02",
-      Config: {
-        Comment: "Domain 2",
-        PrivateZone: false,
+      {
+        Id: "/hostedzone/Z026181333B2XZZ2FT890",
+        Name: "example2.com.",
+        CallerReference: "create-hosted-zone-1713063874773",
+        Config: {
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 5,
       },
-      ResourceRecordSetCount: 12,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN03",
-      Name: "example03.com.",
-      CallerReference: "dummy-caller-reference-03",
-      Config: {
-        Comment: "Domain 3",
-        PrivateZone: true,
+      {
+        Id: "/hostedzone/Z0122273LHYGNIZ1BBOL",
+        Name: "eg.com.",
+        CallerReference: "76724c1a-548f-4211-ba6c-2288925c7f68",
+        Config: {
+          Comment: "",
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 3,
       },
-      ResourceRecordSetCount: 15,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN04",
-      Name: "example04.com.",
-      CallerReference: "dummy-caller-reference-04",
-      Config: {
-        Comment: "Domain 4",
-        PrivateZone: false,
+      {
+        Id: "/hostedzone/Z1013015113LOS2N6S2VW",
+        Name: "www.exampl46.com.",
+        CallerReference: "create-hosted-zone-1713021011377",
+        Config: {
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 2,
       },
-      ResourceRecordSetCount: 20,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN05",
-      Name: "example05.com.",
-      CallerReference: "dummy-caller-reference-05",
-      Config: {
-        Comment: "Domain 5",
-        PrivateZone: true,
+      {
+        Id: "/hostedzone/Z10424241LNPQIJI65KQU",
+        Name: "www.example77.com.",
+        CallerReference: "create-hosted-zone-1713030521880",
+        Config: {
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 2,
       },
-      ResourceRecordSetCount: 8,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN06",
-      Name: "example06.com.",
-      CallerReference: "dummy-caller-reference-06",
-      Config: {
-        Comment: "Domain 6",
-        PrivateZone: false,
+      {
+        Id: "/hostedzone/Z0583121PQVJOG8BHK3",
+        Name: "example3.com.",
+        CallerReference: "create-hosted-zone-1713063875873",
+        Config: {
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 2,
       },
-      ResourceRecordSetCount: 13,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN07",
-      Name: "example07.com.",
-      CallerReference: "dummy-caller-reference-07",
-      Config: {
-        Comment: "Domain 7",
-        PrivateZone: false,
+      {
+        Id: "/hostedzone/Z09593261JR0BPP22XCEK",
+        Name: "example1.com.",
+        CallerReference: "create-hosted-zone-1712864429590",
+        Config: {
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 2,
       },
-      ResourceRecordSetCount: 9,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN08",
-      Name: "example08.com.",
-      CallerReference: "dummy-caller-reference-08",
-      Config: {
-        Comment: "Domain 8",
-        PrivateZone: false,
+      {
+        Id: "/hostedzone/Z03414682XV3PMEMLD27Y",
+        Name: "example5.com.",
+        CallerReference: "create-hosted-zone-1713063873714",
+        Config: {
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 2,
       },
-      ResourceRecordSetCount: 14,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN09",
-      Name: "example09.com.",
-      CallerReference: "dummy-caller-reference-09",
-      Config: {
-        Comment: "Domain 9",
-        PrivateZone: true,
+      {
+        Id: "/hostedzone/Z050589614AIR81CSU86V",
+        Name: "www.example45.com.",
+        CallerReference: "create-hosted-zone-1713021039998",
+        Config: {
+          PrivateZone: false,
+        },
+        ResourceRecordSetCount: 2,
       },
-      ResourceRecordSetCount: 11,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN10",
-      Name: "example10.com.",
-      CallerReference: "dummy-caller-reference-10",
-      Config: {
-        Comment: "Domain 10",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 17,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN11",
-      Name: "example11.com.",
-      CallerReference: "dummy-caller-reference-11",
-      Config: {
-        Comment: "Domain 11",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 21,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN12",
-      Name: "example12.com.",
-      CallerReference: "dummy-caller-reference-12",
-      Config: {
-        Comment: "Domain 12",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 19,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN13",
-      Name: "example13.com.",
-      CallerReference: "dummy-caller-reference-13",
-      Config: {
-        Comment: "Domain 13",
-        PrivateZone: true,
-      },
-      ResourceRecordSetCount: 16,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN14",
-      Name: "example14.com.",
-      CallerReference: "dummy-caller-reference-14",
-      Config: {
-        Comment: "Domain 14",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 22,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN15",
-      Name: "example15.com.",
-      CallerReference: "dummy-caller-reference-15",
-      Config: {
-        Comment: "Domain 15",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 7,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN16",
-      Name: "example16.com.",
-      CallerReference: "dummy-caller-reference-16",
-      Config: {
-        Comment: "Domain 16",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 18,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN17",
-      Name: "example17.com.",
-      CallerReference: "dummy-caller-reference-17",
-      Config: {
-        Comment: "Domain 17",
-        PrivateZone: true,
-      },
-      ResourceRecordSetCount: 13,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN18",
-      Name: "example18.com.",
-      CallerReference: "dummy-caller-reference-18",
-      Config: {
-        Comment: "Domain 18",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 12,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN19",
-      Name: "example19.com.",
-      CallerReference: "dummy-caller-reference-19",
-      Config: {
-        Comment: "Domain 19",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 23,
-    },
-    {
-      Id: "/hostedzone/Z1234567890DOMAIN20",
-      Name: "example20.com.",
-      CallerReference: "dummy-caller-reference-20",
-      Config: {
-        Comment: "Domain 20",
-        PrivateZone: false,
-      },
-      ResourceRecordSetCount: 10,
-    },
-  ],
-  IsTruncated: false,
-  MaxItems: "100",
+    ],
+    IsTruncated: false,
+    MaxItems: "100",
+  },
 };
 
 export const dummyRecord = [

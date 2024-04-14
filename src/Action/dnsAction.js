@@ -72,3 +72,43 @@ export const deleteRecord = async (recordData) => {
     console.error("Error while deleting record:", err);
   }
 };
+
+export const bulkDomainCreate = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await baseApi.post(
+      `${API.dnsApi}/api/dns/bulk/create`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("Bulk domain import successful:", res.data);
+    return res.data;
+  } catch (err) {
+    console.error("Error during bulk domain import:", err);
+  }
+};
+
+export const bulkRecordCreate = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await baseApi.post(
+      `${API.dnsApi}/api/dns/record/bulk/create`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("Bulk DNS record creation successful:", res.data);
+    return res.data;
+  } catch (err) {
+    console.error("Error during bulk DNS record creation:", err);
+  }
+};

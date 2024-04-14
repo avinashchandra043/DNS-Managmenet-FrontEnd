@@ -3,6 +3,8 @@ import { createUseStyles } from "react-jss";
 import Input from "../../../Components/Input";
 import { theme } from "../../../Constants";
 import { createDomain } from "../../../Action/dnsAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = createUseStyles({
   container: {
@@ -49,13 +51,16 @@ const CreateHostedZone = ({ isOpen, onClose }) => {
     domainName: "",
   });
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     const domainName = {
       domainName: recordData.domainName,
     };
-    createDomain(domainName);
-    window.location.reload();
-    onClose();
+    const res = await createDomain(domainName);
+    if (res) {
+      window.location.reload();
+    } else {
+      toast("Domain Creation Failed", { type: "error" });
+    }
   };
 
   if (!isOpen) {
@@ -90,6 +95,7 @@ const CreateHostedZone = ({ isOpen, onClose }) => {
           </div>
         </div>
       </div>
+      <ToastContainer position="bottom-left" autoClose={5000} closeOnClick />
     </div>
   );
 };

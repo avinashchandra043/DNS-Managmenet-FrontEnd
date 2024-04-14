@@ -6,6 +6,8 @@ import { theme, webFontSize } from "../../../Constants";
 import { createUseStyles } from "react-jss";
 import { login, register } from "../../../Action/authAction";
 import { auth } from "../../../Constants/data";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyle = createUseStyles({
   ...webFontSize,
@@ -76,6 +78,8 @@ function SignInSignUpForm() {
     const user = await login(userData);
     if (user) {
       user?.aws ? navigate("/dashboard") : navigate("/auth/aws");
+    } else {
+      toast("Login Failed", { type: "error" });
     }
   };
 
@@ -90,6 +94,9 @@ function SignInSignUpForm() {
     const res = await register(userData);
     if (res) {
       navigate("/auth/aws");
+    } else {
+      toast("Register Failed", { type: "error" });
+      toast("Change Email", { type: "warning" });
     }
   };
 
@@ -265,6 +272,8 @@ function SignInSignUpForm() {
           </div>
         </div>
       </div>
+
+      <ToastContainer position="bottom-left" autoClose={5000} closeOnClick />
     </div>
   );
 }

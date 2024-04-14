@@ -4,6 +4,8 @@ import Input from "../../../Components/Input";
 import { theme } from "../../../Constants";
 import { updateRecord } from "../../../Action/dnsAction";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = createUseStyles({
   container: {
@@ -51,7 +53,7 @@ const EditRecordModal = ({ isOpen, onClose, onCreate, record }) => {
     TTL: record.TTL,
   });
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     const data = {
       hostedZoneId: `/hostedzone/${hostedZoneId}`,
       name: record.Name,
@@ -59,8 +61,12 @@ const EditRecordModal = ({ isOpen, onClose, onCreate, record }) => {
       ttl: recordData.TTL,
       value: record.ResourceRecords[0].Value,
     };
-    updateRecord(data);
-    onClose();
+    const res = await updateRecord(data);
+    if (res) {
+      window.location.reload();
+    } else {
+      toast("Record Edit Failed", { type: "error" });
+    }
   };
 
   if (!isOpen) {
@@ -95,6 +101,7 @@ const EditRecordModal = ({ isOpen, onClose, onCreate, record }) => {
           </div>
         </div>
       </div>
+      <ToastContainer position="bottom-left" autoClose={5000} closeOnClick />
     </div>
   );
 };

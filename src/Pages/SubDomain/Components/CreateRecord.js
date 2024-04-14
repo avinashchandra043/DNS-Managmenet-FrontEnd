@@ -6,6 +6,8 @@ import { recordType } from "../../../Constants/data";
 import DropDown from "../../../Components/DropDown";
 import { createRecord } from "../../../Action/dnsAction";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = createUseStyles({
   container: {
@@ -56,7 +58,7 @@ const CreateRecordModal = ({ isOpen, onClose }) => {
     Value: "",
   });
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     const data = {
       hostedZoneId: `/hostedzone/${hostedZoneId}`,
       name: recordData.Name,
@@ -64,8 +66,12 @@ const CreateRecordModal = ({ isOpen, onClose }) => {
       ttl: recordData.TTL,
       value: recordData.Value,
     };
-    createRecord(data);
-    onClose();
+    const res = await createRecord(data);
+    if (!res) {
+      toast("Record Creation Failed", { type: "error" });
+    } else {
+      window.location.reload();
+    }
   };
 
   if (!isOpen) {
@@ -123,6 +129,7 @@ const CreateRecordModal = ({ isOpen, onClose }) => {
           </div>
         </div>
       </div>
+      <ToastContainer position="bottom-left" autoClose={5000} closeOnClick />
     </div>
   );
 };

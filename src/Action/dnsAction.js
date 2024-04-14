@@ -6,8 +6,14 @@ const { dispatch } = store;
 export const createDomain = async (domainName) => {
   try {
     const res = await baseApi.post(`${API.dnsApi}/api/dns/create`, domainName);
-    return res;
-  } catch (err) {}
+    console.log(">>>>>res", res);
+    if (res) {
+      return res;
+    }
+    return false;
+  } catch (err) {
+    return false;
+  }
 };
 
 export const listDomain = async () => {
@@ -15,8 +21,12 @@ export const listDomain = async () => {
     const res = await baseApi.get(`${API.dnsApi}/api/dns/list`);
     if (res) {
       dispatch({ type: DOMAIN_LIST, payload: res.data.data });
+      return true;
     }
-  } catch (err) {}
+    return false;
+  } catch (err) {
+    return false;
+  }
 };
 
 export const createRecord = async (recordData) => {
@@ -25,8 +35,12 @@ export const createRecord = async (recordData) => {
       `${API.dnsApi}/api/dns/record/create`,
       recordData
     );
-    return res;
-  } catch (err) {}
+    if (res) {
+      return true;
+    } else return false;
+  } catch (err) {
+    return false;
+  }
 };
 
 export const listRecord = async (recordData) => {
@@ -36,8 +50,11 @@ export const listRecord = async (recordData) => {
     });
     if (res) {
       dispatch({ type: RECORD_LIST, payload: res.data });
-    }
-  } catch (err) {}
+      return true;
+    } else return false;
+  } catch (err) {
+    return false;
+  }
 };
 
 export const updateRecord = async (recordData) => {
@@ -46,8 +63,12 @@ export const updateRecord = async (recordData) => {
       `${API.dnsApi}/api/dns/record/update`,
       recordData
     );
-    return res;
-  } catch (err) {}
+    if (res) {
+      return true;
+    } else return false;
+  } catch (err) {
+    return false;
+  }
 };
 
 export const deleteRecord = async (recordData) => {
@@ -70,6 +91,7 @@ export const deleteRecord = async (recordData) => {
     return response;
   } catch (err) {
     console.error("Error while deleting record:", err);
+    return false;
   }
 };
 

@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getToken, getUser } from "../../Action/authAction";
 import { bulkDomainCreate, listDomain } from "../../Action/dnsAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyle = createUseStyles({
   container: {
@@ -69,22 +71,28 @@ const Dashboard = ({ jwt, user }) => {
 
   useEffect(() => {
     const token = getToken();
-    if (token && !jwt) {
+    if (token && !(jwt && user?.email)) {
       getUser(token);
     }
     if (!token) {
       navigate("/auth");
     }
-  }, [jwt, navigate]);
+  }, [jwt, navigate, user]);
 
   useEffect(() => {
-    if (user) {
-      if (!user.aws) {
-        navigate("/auth/aws");
-      } else {
-        listDomain();
+    const fetchData = async () => {
+      if (user) {
+        if (!user.aws) {
+          navigate("/auth/aws");
+        } else {
+          const res = await listDomain();
+          if (!res) {
+            toast("Failed to Load Record", { type: "error" });
+          }
+        }
       }
-    }
+    };
+    fetchData();
   }, [user, navigate]);
 
   const handleFileChange = (event) => {
@@ -143,6 +151,7 @@ const Dashboard = ({ jwt, user }) => {
         isOpen={isModalOpen.createDomain}
         onClose={() => closeModal("createDomain")}
       />
+      <ToastContainer position="bottom-left" autoClose={5000} closeOnClick />
     </div>
   );
 };
